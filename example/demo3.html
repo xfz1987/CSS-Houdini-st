@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>锯齿状的边缘</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0 20px;
+      background-image: linear-gradient(to bottom right, #74ebd5, #acb6e5);
+      font: 1rem/1.25 'Mukta Mahee', sans-serif;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      align-items: center;
+      height: 100%;
+    }
+    .slot {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      height: 200px;
+      border: 2px solid #000;
+    }
+  </style>
+  <script>
+    if ('paintWorklet' in CSS && 'registerProperty' in CSS && 'CSSUnitValue' in window) {     
+      // 我们首先要注册一些自定义属性  
+      CSS.registerProperty({
+        name: '--tooth-width',
+        syntax: '<length>',
+        inherits: false,
+        initialValue: '40px'
+      })
+
+      CSS.registerProperty({
+        name: '--tooth-height',
+        syntax: '<length>',
+        inherits: false,
+        initialValue: '20px'
+      })
+
+      CSS.paintWorklet.addModule('./demo3.js')
+    }
+  </script>
+  <style>
+    .jagged {
+      background: paint(jagged-edge);
+      position: absolute;
+      top: 30%;
+      bottom: 0;
+      width: 100%;
+      color: #fff;
+    }
+    .slot:nth-child(1) .jagged {
+      --tooth-width: 50px;
+      --tooth-height: 25px;
+    }
+
+    .slot:nth-child(2) .jagged {
+      --tooth-width: 2rem;
+      --tooth-height: 3rem;
+    }
+
+    .slot:nth-child(3) .jagged {
+      --tooth-width: calc(33vw - 31px);
+      --tooth-height: 2em;
+    }
+
+    .info {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }   
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="slot">
+      <div class="jagged">
+        <div class="info">
+          --tooth-width: 50px;<br>
+          --tooth-height: 25px;
+        </div>
+      </div>
+    </div>
+    <div class="slot">
+      <div class="jagged">
+        <div class="info">
+          --tooth-width: 2rem;<br>
+          --tooth-height: 3rem;
+        </div>
+      </div>
+    </div>
+    <div class="slot">
+      <div class="jagged">
+        <div class="info">
+          --tooth-width: calc(33vw - 31px);<br>
+          --tooth-height: 2em;
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

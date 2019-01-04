@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>给textarea加一个方格背</title>
+  <style>
+    textarea {
+      width: 100px;
+      height: 60px;
+      background-image: paint(checkerboard);
+    }
+  </style>
+</head>
+<body>
+  <textarea></textarea>
+  <script>    
+    if ('paintWorklet' in CSS) {
+      CSS.paintWorklet.addModule('./demo6.js')
+    } else {
+      document.body.innerHTML = 'not supportr'
+    }
+  </script>
+</body>
+</html>

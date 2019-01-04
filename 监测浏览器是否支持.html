@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    @supports (background: paint(id)) {
+      /* Paint API supported */
+      .css-check {
+        color: green;
+      }
+    }
+    @supports not (background: paint(id)) {
+      /* Paint API not supported */
+      .css-check.fail {
+        red: red;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="js-check"></div>
+  <div class="css-check">CSS检查通过为绿色，否则为红色</div>
+  <script>
+    let jsCheck = document.querySelector('.js-check')
+    jsCheck.innerHTML = ('paintWorklet' in CSS) ? 'js check pass': 'js check fail'
+  </script>
+</body>
+</html>

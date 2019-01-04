@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画一个占位符</title>
+  <script>
+    CSS.paintWorklet.addModule('./demo1.js')
+  </script>
+  <style>
+    .placeholder {
+      background-image: paint(placeholder-box);
+      width: 100px;
+      height: 100px;
+      border: 2px solid #666;
+    }
+
+    .placeholder-dom {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #666;
+      overflow: hidden;
+    }
+    .placeholder-dom:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 2px;
+      height: 200px;
+      background: #666;
+      transform: rotate(45deg) translateY(-100px);
+    }
+    .placeholder-dom:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: block;
+      width: 2px;
+      height: 200px;
+      background: #666;
+      transform: rotate(-45deg) translateY(100px);
+    }
+  </style>
+</head>
+<body>
+  <div class="placeholder"></div>
+
+  <div class="placeholder-dom"></div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>锯齿状的边缘</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: #000;
+      font: 1rem/1.25 'Mukta Mahee', sans-serif;
+    }
+
+    .dot {
+      --dot-spacing: 20px;
+      --dot-fade-offset: 0%;
+      --dot-color: #40e0d0;
+      background-image: paint(dot-fade);
+    
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      bottom: 40px;
+      left: 40px;
+    }
+  </style>
+  <script>
+    if ('paintWorklet' in CSS && 'registerProperty' in CSS && 'CSSUnitValue' in window) {      
+      CSS.registerProperty({
+        name: '--dot-spacing',
+        syntax: '<length>',
+        inherits: false,
+        initialValue: '20px'
+      })
+      CSS.registerProperty({
+        name: '--dot-fade-offset',
+        syntax: '<percentage>',
+        inherits: false,
+        initialValue: '0%'
+      })
+      CSS.registerProperty({
+        name: '--dot-color',
+        syntax: '<color>',
+        inherits: false,
+        initialValue: '#fff'
+      })
+
+      CSS.paintWorklet.addModule('./demo4.js')
+    }
+  </script>
+</head>
+<body>
+  <div class="dot"></div>  
+</body>
+</html>

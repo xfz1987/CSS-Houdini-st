@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画一个占位符</title>
+  <script>
+    if ('paintWorklet' in CSS && 'CSSUnitValue' in window) {
+      CSS.paintWorklet.addModule('./demo2.js')
+    }
+  </script>
+  <style>
+    .placeholder {
+      background-image: paint(placeholder-box-props);
+      width: 100px;
+      height: 100px;
+      margin: 20px;
+      float: left;
+    }
+    .placeholder:nth-child(1) {
+      border: 2px solid #fd7e14;
+    }
+    .placeholder:nth-child(2) {
+      border: 6px solid #228be6;
+    }
+    .placeholder:nth-child(3) {
+      border: 1rem solid #e64980;
+    }
+  </style>
+</head>
+<body>
+  <div class="placeholder"></div>
+  <div class="placeholder"></div>
+  <div class="placeholder"></div>
+</body>
+</html>

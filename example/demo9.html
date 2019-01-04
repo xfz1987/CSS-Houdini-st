@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>星空</title>
+  <style>
+    body {
+      margin: 0;
+      color: #fff;
+      font-size: 24px;
+      background-color: #000;
+    }
+    body:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%; 
+      --star-density: 0.8; /*星星密度*/
+      --starry-sky-seed: 1;
+      --star-opacity: 1;
+      width: 100%;
+      height: 100%;
+      background-image: paint(starry-sky);
+
+      animation: shine 1s linear alternate infinite;
+    }
+
+    @keyframes shine {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0.6;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    if ('paintWorklet' in CSS) {
+      // let blobURL = URL.createObjectURL( new Blob([ '(', function() { 
+        
+      //   class StarrySky {
+      //     paint (ctx, paintSize, properties) {
+      //       // ctx.fillRect(0, 0, paintSize.width, paintSize.height)
+      //       let xMax= paintSize.width
+      //       let yMax = paintSize.height
+            
+      //       // 黑色夜空
+      //       ctx.fillRect(0, 0, xMax, yMax)
+
+      //       // 星星的数量 
+      //       let hmTimes = xMax + yMax 
+      //       for (let i = 0; i <= hmTimes; i++) {
+      //         // 星星的xy坐标，随机 
+      //         let x = Math.floor((Math.random() * xMax) + 1)
+      //         let y = Math.floor((Math.random() * yMax) + 1)
+      //         // 星星的大小
+      //         let size = Math.floor((Math.random() * 2) + 1)
+      //         // 星星的亮暗
+      //         let opacityOne = Math.floor((Math.random() * 9) + 1)
+      //         let opacityTwo = Math.floor((Math.random() * 9) + 1)
+      //         let hue = Math.floor((Math.random() * 360) + 1)
+
+      //         ctx.fillStyle = `hsla(${hue}, 30%, 80%, .${opacityOne + opacityTwo})`
+      //         ctx.fillRect(x, y, size, size)
+      //       }
+      //     }
+      //   } 
+
+      //   registerPaint('starry-sky', StarrySky)}.toString(), 
+        
+      //   ')()' ], { type: 'application/javascript' } ) 
+      // )
+
+      CSS.paintWorklet.addModule('demo9.js')
+    } else {
+      document.body.innerHTML = 'not support'
+    }
+  </script>
+</body>
+</html>
